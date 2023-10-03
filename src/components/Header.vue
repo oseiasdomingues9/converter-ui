@@ -16,7 +16,7 @@ let users = reactive<User>({
     login: '',
     active: false,
     role: '',
-    healthPlan : []
+    healthInsurance : []
 });
 
 function load(){
@@ -40,10 +40,10 @@ const items2 = ref([
         },
     },
     {
-        label: 'Planos', 
+        label: 'Operadoras', 
         icon: 'pi pi-briefcase', 
         command : () => {
-            router.push("/plans")
+            router.push("/health-insurance")
         },
     },
     {

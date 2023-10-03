@@ -4,17 +4,17 @@ import { onMounted, reactive} from 'vue';
 import { useDialog } from 'primevue/usedialog';
 import FormUser from '../components/user/FormUser.vue'
 import User from '../models/User'
-import HealthPlan from '../models/HealthPlan';
-import HealthPlanService from '../services/HealthPlanService';
+import HealthInsurance from '../models/HealthInsurance';
+import HealthInsuranceService from '../services/HealthInsuranceService';
 
 
-let healthPlan = reactive<HealthPlan[]>([]);
+let healthInsurance = reactive<HealthInsurance[]>([]);
 const dialog = useDialog();
 
 
 onMounted(() => {
-  HealthPlanService.findAll().then((res : any) => {
-      Object.assign(healthPlan,res.data.data)
+  HealthInsuranceService.findAll().then((res : any) => {
+      Object.assign(healthInsurance,res.data.data)
   })
 })
 
@@ -64,7 +64,7 @@ function openDialog(user : User){
 <template>
   <div class="mx-auto w-11 mt-5">
     
-    <DataTable :value="healthPlan" tableStyle="min-width: 50rem" @row-click="openDialog($event.data)">
+    <DataTable :value="healthInsurance" tableStyle="min-width: 50rem" @row-click="openDialog($event.data)">
         <template #header>
           <div class="flex flex-wrap align-items-center justify-content-end gap-2">
               <Button label="Novo" icon="pi pi-plus" class="mr-2" @click="openDialogCreate()"/>      

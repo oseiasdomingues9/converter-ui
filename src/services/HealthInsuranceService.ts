@@ -1,6 +1,6 @@
 import axios from "./Axios"
 
-let base = "/plans"
+let base = "/health-insurance"
 
 export default{
 

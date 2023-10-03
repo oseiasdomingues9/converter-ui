@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import UserList from '../view/UserList.vue';
 import ClientList from '../view/ClientList.vue';
-import HealthPlanList from '../view/HealthPlanList.vue';
+import HealthInsuranceList from '../view/HealthInsuranceList.vue';
 import Login from '../view/Login.vue';
 import ConversorTiss from '../view/ConversorTiss.vue';
 
@@ -35,7 +35,7 @@ export default createRouter({
         {
             path : '/plans',
             beforeEnter : controlGuard,
-            component : HealthPlanList,
+            component : HealthInsuranceList,
         },
         {
             path : '/users',

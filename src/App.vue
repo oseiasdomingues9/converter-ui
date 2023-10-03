@@ -17,7 +17,11 @@ let users = reactive<User>({
     login: '',
     active: false,
     role: '',
-    healthPlan : []
+    healthInsurance: [],
+    email: '',
+    clientKey: '',
+    plantType: '',
+    url: ''
 });
 
 onUpdated(() =>{

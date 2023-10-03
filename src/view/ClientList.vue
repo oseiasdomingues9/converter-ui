@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import { onMounted, reactive} from 'vue';
-import UserService from '../services/UserService';
 import { useDialog } from 'primevue/usedialog';
 import FormUser from '../components/user/FormUser.vue'
 import User from '../models/User'

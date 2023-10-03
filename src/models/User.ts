@@ -1,4 +1,4 @@
-import HealthPlan from "./HealthPlan"
+import HealthInsurance from "./HealthInsurance"
 
 export default interface User {
     id:string,
@@ -8,6 +8,6 @@ export default interface User {
     role: string
     clientKey : string,
     plantType : string,
-    healthPlan : HealthPlan[],
+    healthInsurance : HealthInsurance[],
     url : string
   }

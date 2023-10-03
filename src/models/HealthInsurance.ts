@@ -1,4 +1,4 @@
-export default interface HealthPlan {
+export default interface HealthInsurance {
     id:string,
     name: string,
     version: string[],

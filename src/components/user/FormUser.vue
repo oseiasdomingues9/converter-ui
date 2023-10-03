@@ -20,7 +20,7 @@ function userInitial() {
     login: '',
     active: false,
     role: '',
-    healthPlan: [],
+    healthInsurance: [],
     email: '',
     clientKey: '',
     plantType: '',

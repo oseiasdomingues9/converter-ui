@@ -69,7 +69,7 @@ const versao = ref();
 const operadoraNome = ref();
 
 function testeB(){
-    let operador = props.users.healthPlan.find(x => x.id === operadoraSelecionada.value)
+    let operador = props.users.healthInsurance.find(x => x.id === operadoraSelecionada.value)
     versao.value = operador?.version
     operadoraNome.value = operador?.name
 }
@@ -92,7 +92,7 @@ function teesaaa(){
                     <Button @click="chooseCallback()" icon="pi pi-folder-open" rounded outlined :disabled="!files || files.length > 0" ref="btnSearch"></Button>
                 </div>
                 <div class="card flex justify-content-center gap-3">
-                    <Dropdown v-model="operadoraSelecionada" :options="props.users.healthPlan" optionLabel="name" option-value="id" placeholder="Operadora" class="w-15rem" @update:model-value="testeB" />
+                    <Dropdown v-model="operadoraSelecionada" :options="props.users.healthInsurance" optionLabel="name" option-value="id" placeholder="Operadora" class="w-15rem" @update:model-value="testeB" />
                     <Dropdown v-model="versaoSelecionada" :options="versao" placeholder="Versão" class="w-full" :disabled="!operadoraSelecionada"/>
                 </div>
                 <div>
