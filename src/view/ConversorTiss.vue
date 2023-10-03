@@ -1,5 +1,23 @@
 <script setup lang="ts">
-import Upload from "./Upload.vue"
+import { reactive } from "vue";
+import Upload from "../components/conversor/Upload.vue"
+import User from "../models/User";
+
+
+
+const props = defineProps<{
+    user: any,
+}>();
+
+let users = reactive<User>({
+    id: '',
+    login: '',
+    active: false,
+    role: '',
+    healthPlan : []
+});
+
+users = props.user
 
 </script>
 
@@ -9,15 +27,9 @@ import Upload from "./Upload.vue"
             <Card class="w-full h-full">
                 <template #title> Upload </template>
                 <template #content>
-                    <Upload/>
+                    <Upload :users="users"/>
                 </template>
             </Card>
-            <!--<Card class="ml-3 w-6 h-30rem">
-                <template #title> Download </template>
-                <template #content>
-      
-                </template>
-            </Card>-->
         </div>
     </div>
 </template>
