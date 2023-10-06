@@ -16,7 +16,12 @@ let users = reactive<User>({
     login: '',
     active: false,
     role: '',
-    healthInsurance : []
+    healthInsurance: [],
+    email: '',
+    planType: '',
+    url: '',
+    password: '',
+    client: undefined
 });
 
 function load(){
@@ -75,7 +80,7 @@ function showMenu(event : any){
     <Menubar class="bg-gray-800 border-noround border-none">
         <template #start>
             <div class="logo">
-                <span class="ml-1 text-4xl text-yellow-500" @click="router.push('/conversor')">Conversor TISS</span>
+                <span class="ml-1 text-4xl text-yellow-500" @click="router.push('/conversor')">Conversor</span>
             </div>
         </template>
         <template #end>

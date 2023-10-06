@@ -28,9 +28,13 @@ import Toast from 'primevue/toast';
 import Toolbar from 'primevue/toolbar';
 import FileUpload from 'primevue/fileupload';
 import Badge from 'primevue/badge';
+import ConfirmDialog from 'primevue/confirmdialog';
+import Divider from 'primevue/divider';
+import Chips from 'primevue/chips';
 
 import DialogService from 'primevue/dialogservice';
 import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
 
 export const primevue = {
   install(app : any) {
@@ -59,9 +63,12 @@ export const primevue = {
     app.component('InputSwitch',InputSwitch);
     app.component('FileUpload',FileUpload);
     app.component('Badge',Badge);
-
+    app.component('ConfirmDialog',ConfirmDialog);
+    app.component('Divider',Divider);
+    app.component('Chips',Chips); 
 
     app.use(ToastService)
     app.use(DialogService);
+    app.use(ConfirmationService)
   }
 }

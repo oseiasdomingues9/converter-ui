@@ -1,3 +1,4 @@
+import HealthInsurance from "../models/HealthInsurance"
 import axios from "./Axios"
 
 let base = "/health-insurance"
@@ -9,6 +10,15 @@ export default{
     },
     findById(id : string){
         return axios.get(base + "/" + id)
+    },
+    create(healthInsurance : HealthInsurance){
+        return axios.post(base,healthInsurance)
+    },
+    update(healthInsurance : HealthInsurance,id : number){
+        return axios.put(base + "/" + id,healthInsurance)
+    },
+    delete(id : number){
+        return axios.delete(base + "/" + id)
     }
 
 }

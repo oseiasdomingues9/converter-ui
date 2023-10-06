@@ -3,7 +3,7 @@ import UserList from '../view/UserList.vue';
 import ClientList from '../view/ClientList.vue';
 import HealthInsuranceList from '../view/HealthInsuranceList.vue';
 import Login from '../view/Login.vue';
-import ConversorTiss from '../view/ConversorTiss.vue';
+import Conversor from '../view/Conversor.vue';
 
 import { authGuard } from '../guards/authGuard';
 import { conversorGuard } from '../guards/conversorGuard';
@@ -25,7 +25,7 @@ export default createRouter({
         {
             path: '/conversor',
             beforeEnter : conversorGuard,
-            component: ConversorTiss,
+            component: Conversor,
         },
         {
             path : '/clients',
@@ -33,7 +33,7 @@ export default createRouter({
             component : ClientList,
         },
         {
-            path : '/plans',
+            path : '/health-insurance',
             beforeEnter : controlGuard,
             component : HealthInsuranceList,
         },

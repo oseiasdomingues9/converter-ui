@@ -1,78 +1,69 @@
 
 <script setup lang="ts">
-import { onMounted, reactive} from 'vue';
+import { markRaw, onMounted, reactive} from 'vue';
 import { useDialog } from 'primevue/usedialog';
-import FormUser from '../components/user/FormUser.vue'
-import User from '../models/User'
-import HealthInsurance from '../models/HealthInsurance';
+import HealthInsuranceForm from '../components/health-insurance/HealthInsuranceForm.vue'
 import HealthInsuranceService from '../services/HealthInsuranceService';
+import HealthInsurance from '../models/HealthInsurance';
+import HeaderHealthInsurance from '../components/health-insurance/HeaderHealthInsurance.vue';
+import ColorService from '../services/ColorService';
 
 
-let healthInsurance = reactive<HealthInsurance[]>([]);
+
+let healthInsurances = reactive<HealthInsurance[]>([]);
 const dialog = useDialog();
 
-
 onMounted(() => {
-  HealthInsuranceService.findAll().then((res : any) => {
-      Object.assign(healthInsurance,res.data.data)
-  })
+  findAll()
 })
 
-
-//Modal
-function openDialogCreate(){
-    dialog.open(FormUser, {
+function openDialog(healthInsurance : HealthInsurance | null){
+    dialog.open(HealthInsuranceForm, {
         props: {
-          header: 'Dados',
-          style: {
-              width: '35vw',
-          },
-          breakpoints:{
-              '960px': '75vw',
-              '640px': '90vw'
-          },
+          closable : false,
           modal: true
-      }
-    });
-}
-
-
-//Modal
-function openDialog(user : User){
-    dialog.open(FormUser, {
-        props: {
-          header: 'Dados',
-          style: {
-              width: '35vw',
-          },
-          breakpoints:{
-              '960px': '75vw',
-              '640px': '90vw'
-          },
-          modal: true
-      },
+        },
+        templates: {
+            header: markRaw(HeaderHealthInsurance)
+        },
         data:{
-          user : user
+          healthInsurance : healthInsurance
+        },
+        onClose: (options) => {
+            if(options?.data.isDelete) deleteRefresh(options.data.id)
+            findAll()
         }
-    });
+    })
 }
 
+function deleteRefresh(id : string){
+  let i = healthInsurances.findIndex(healthInsurance => healthInsurance.id == id)
+  healthInsurances.splice(i)      
+}
 
+function findAll(){
+  HealthInsuranceService.findAll().then((res : any) => {
+      Object.assign(healthInsurances,res.data.data)
+  })
+}
 
 </script>
 
 <template>
   <div class="mx-auto w-11 mt-5">
     
-    <DataTable :value="healthInsurance" tableStyle="min-width: 50rem" @row-click="openDialog($event.data)">
+    <DataTable :value="healthInsurances" @row-click="openDialog($event.data)" stripedRows :rowHover="true">
         <template #header>
           <div class="flex flex-wrap align-items-center justify-content-end gap-2">
-              <Button label="Novo" icon="pi pi-plus" class="mr-2" @click="openDialogCreate()"/>      
+              <Button label="Novo" icon="pi pi-plus" class="bg-orange-500 hover:bg-orange-700" @click="openDialog(null)"/>      
           </div>
         </template>
-        <Column field="id" header="Nome"></Column>
-        <Column field="planType" header="Empresa"></Column>
-        <Column field="name" header="Role"></Column>
+        <Column field="name" header="Nome"></Column>
+        <Column field="planType" header="Plano">
+          <template #body="slotProps">
+            <Tag :value="slotProps.data.planType" :style="ColorService.colorPlan(slotProps.data.planType)" />
+          </template>
+        </Column>        
         <DynamicDialog/>
       </DataTable>
   </div>
