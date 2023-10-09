@@ -1,7 +1,7 @@
 import HealthInsurance from "../models/HealthInsurance"
 import axios from "./Axios"
 
-let base = "/health-insurance"
+let base = "/api/health-insurance"
 
 export default{
 

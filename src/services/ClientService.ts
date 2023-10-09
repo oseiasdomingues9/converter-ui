@@ -1,7 +1,7 @@
 import Client from "../models/Client"
 import axios from "./Axios"
 
-let base = "/client"
+let base = "/api/client"
 
 export default{
 

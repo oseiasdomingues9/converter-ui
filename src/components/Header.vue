@@ -1,40 +1,28 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import User from '../models/User';
+import AuthService from '../services/AuthService';
+import UserService from '../services/UserService';
+import CryptoServices from '../services/CryptoServices';
 
 
 const router = useRouter();
 
-const props = defineProps<{
-    user: any,
-}>();
-
-
-let users = reactive<User>({
-    id: '',
-    login: '',
-    active: false,
-    role: '',
-    healthInsurance: [],
-    email: '',
-    planType: '',
-    url: '',
-    password: '',
-    client: undefined
-});
-
-function load(){
-    users = props.user
-}
-
-load()
-
 function logout(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    router.push('/login');
+    AuthService.logout().then(() =>{
+        localStorage.clear();
+        router.push('/login');
+    })
 }
+
+onMounted(() => {
+  let user = CryptoServices.decrypted(localStorage.getItem("user"))
+  UserService.findRole(user).then((res) => {
+    role.value = res.data.data
+  })
+})
+
+let role = ref('')
 
 const items2 = ref([
     {
@@ -85,8 +73,7 @@ function showMenu(event : any){
         </template>
         <template #end>
             <div class="flex align-items-center gap-3">
-                <span>{{ users.login }}</span>
-                <div v-if="users.role == 'ADMIN'">
+                <div v-if="role == 'ADMIN'">
                     <Button icon="pi pi-cog" rounded class="bg-orange-500 hover:bg-orange-700" @click="showMenu"></Button>
                     <Menu ref="menu" id="overlay_menu" :model="items2" :popup="true" />
                 </div>

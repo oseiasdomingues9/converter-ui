@@ -42,10 +42,8 @@ function deleteRefresh(id : string){
 }
 
 function findAll(){
-  console.log(users)
   UserService.findAll().then((res : any) => {
       Object.assign(users,res.data.data)
-      console.log(users)
   })
 }
 

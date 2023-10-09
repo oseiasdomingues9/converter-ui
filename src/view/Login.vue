@@ -12,8 +12,8 @@ const errorMessage = ref()
 
 function login(){
     AuthService.login(username.value,password.value).then((res : any) => {
-        localStorage.setItem('token', CryptoServices.encrypted(res.data.token));
         localStorage.setItem('user', CryptoServices.encrypted(res.data.userId));
+        localStorage.setItem('authenticated', 'true');
         router.push('/conversor'); 
     }).catch((err : any) => {
         errorMessage.value = err.message

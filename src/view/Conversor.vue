@@ -2,12 +2,13 @@
 import { reactive } from "vue";
 import Upload from "../components/conversor/Upload.vue"
 import User from "../models/User";
+import CryptoServices from "../services/CryptoServices";
+import AuthService from "../services/AuthService";
+import UserService from "../services/UserService";
+import { useRouter } from "vue-router";
 
+const route = useRouter()
 
-
-const props = defineProps<{
-    user: any,
-}>();
 
 let users = reactive<User>({
     id: '',
@@ -15,13 +16,38 @@ let users = reactive<User>({
     active: false,
     role: '',
     healthInsurance: [],
-    email: "",
-    clientKey: "",
-    plantType: "",
+    email: '',
+    password: "",
+    client: undefined,
+    planType: "",
     url: ""
 });
 
-users = props.user
+function getUser(){
+    if(localStorage.getItem("authenticated")){
+        let userId : any = CryptoServices.decrypted(localStorage.getItem('user'))
+        UserService.findById(userId).then((res) => {
+            Object.assign(users,res.data.data)
+        }).
+        catch(() => {
+            localStorage.removeItem("authenticated")
+            logout()
+        }
+    )}else{
+        logout()
+    }
+}
+
+function logout(){
+    AuthService.logout()
+    .then(() => {
+        localStorage.removeItem("authenticated")
+        route.push("/login")
+    })
+}
+
+getUser()
+
 
 </script>
 

@@ -28,7 +28,6 @@ const disable = () => {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
             UserService.disable(data.user.id).then((res : any) => {
-                console.log(res)
                 close(false)
             })
         },

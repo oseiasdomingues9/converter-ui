@@ -1,13 +1,9 @@
 import AuthService from "../services/AuthService"
 
 export function conversorGuard(to, from, next) {
-    if(!localStorage.getItem('token')){
-        next('/login');
+    if(localStorage.getItem("authenticated")){
+        next()
     }else{
-        AuthService.validate().then(() => {
-            next()
-        }).catch(() => {
-            next('/login');        
-        })
+        next('/login');        
     }
 }

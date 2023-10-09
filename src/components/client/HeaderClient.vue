@@ -25,7 +25,6 @@ const remove = () => {
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
             ClientService.delete(data.client.id).then((res : any) => {
-                console.log(res)
                 close(true)
             })
         },

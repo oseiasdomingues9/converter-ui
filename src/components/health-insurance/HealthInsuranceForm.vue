@@ -44,9 +44,7 @@ function healthInsuranceServiceErrorInitial() {
 onMounted(() => {
   if(data.healthInsurance){
     Object.assign(healthInsurance,data.healthInsurance)
-    console.log(data.healthInsurance)
     value.value = healthInsurance.version
-    console.log(value.value)
     isUpdate.value = true
   }
 
